@@ -1,16 +1,60 @@
 {
   "name": "ConstructTrack Pro",
   "short_name": "ConstructTrack",
-  "description": "A professional project management app for constructors with robust time tracking, task management, and assignment features. The design is modern, data-driven, and prioritizes clarity and ease of use.",
-  "start_url": ".",
+  "description": "A professional project management app for construction teams with robust time tracking, task management, and invoicing features. Optimized for mobile and desktop use.",
+  "start_url": "/",
+  "id": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#f3f4f6",
   "theme_color": "#1E3A5F",
+  "lang": "en",
+  "categories": ["business", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshots/mobile-dashboard.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
   "icons": [
     {
       "src": "/scc-logo-72.png",
       "sizes": "72x72",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/scc-logo-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/scc-logo-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/scc-logo-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/scc-logo-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/scc-logo-192.png",
@@ -19,9 +63,58 @@
       "purpose": "any maskable"
     },
     {
+      "src": "/scc-logo-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
       "src": "/scc-logo-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Clock In/Out",
+      "short_name": "Time",
+      "description": "Quick access to time tracking",
+      "url": "/time-tracking",
+      "icons": [
+        {
+          "src": "/icons/clock-icon-96.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "View and manage projects",
+      "url": "/projects",
+      "icons": [
+        {
+          "src": "/icons/project-icon-96.png", 
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "short_name": "Tasks",
+      "description": "View assigned tasks",
+      "url": "/tasks",
+      "icons": [
+        {
+          "src": "/icons/task-icon-96.png",
+          "sizes": "96x96", 
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
 }

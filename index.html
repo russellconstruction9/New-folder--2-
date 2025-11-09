@@ -6,9 +6,30 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
+    
+    <!-- SEO Meta Tags -->
+    <title>ConstructTrack Pro - Construction Project Management Software</title>
+    <meta name="description" content="Professional construction project management app with time tracking, task management, invoicing, and team collaboration. Optimized for mobile and desktop use." />
+    <meta name="keywords" content="construction management, project tracking, time tracking, task management, invoicing, construction software, mobile app" />
+    <meta name="author" content="Russell Construction" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ConstructTrack Pro - Construction Project Management" />
+    <meta property="og:description" content="Streamline your construction projects with professional time tracking, task management, and invoicing features." />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="https://constructtrack-pro.netlify.app" />
+    <meta property="og:site_name" content="ConstructTrack Pro" />
+    
+    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#1E3A5F" />
-    <meta name="description" content="ConstructTrack Pro – Project management for construction teams" />
-    <title>ConstructTrack Pro</title>
+    <meta name="application-name" content="ConstructTrack Pro" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ConstructTrack" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-TileColor" content="#1E3A5F" />
 
     <!-- ✅ PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
@@ -17,9 +38,25 @@
     <link rel="icon" href="/scc-logo-72.png" sizes="72x72" type="image/png" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <link rel="apple-touch-icon" href="/scc-logo-192.png">
+    
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://maps.googleapis.com" />
+    <link rel="preconnect" href="https://generativelanguage.googleapis.com" />
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com" />
 
-    <!-- ✅ Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyS8VmIL-AbFnpm_xmuKZ-XG8AmSA03AM&libraries=marker" async defer></script>
+    <!-- Conditional Google Maps loading for production -->
+    <script>
+      // Load Google Maps API only in production or when API key is available
+      if (window.location.hostname !== 'localhost' || typeof GOOGLE_MAPS_API_KEY !== 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=' + (import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_API_KEY') + '&libraries=marker';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+    </script>
 
     <!-- ✅ Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -53,12 +90,28 @@
 }
 </script>
 
-    <!-- ✅ Optional: CSP for security -->
-    <!-- 
+    <!-- Security CSP for production -->
     <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://aistudiocdn.com https://maps.googleapis.com; style-src 'self' 'unsafe-inline';">
-    -->
-  <link rel="stylesheet" href="/index.css">
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://aistudiocdn.com https://maps.googleapis.com https://generativelanguage.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://maps.googleapis.com https://maps.gstatic.com; connect-src 'self' https://maps.googleapis.com https://generativelanguage.googleapis.com; worker-src 'self' blob:;">
+    
+    <link rel="stylesheet" href="/index.css">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "ConstructTrack Pro",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "description": "Professional construction project management software with time tracking, task management, and invoicing features.",
+      "url": "https://constructtrack-pro.netlify.app",
+      "author": {
+        "@type": "Organization",
+        "name": "Russell Construction"
+      }
+    }
+    </script>
 </head>
 
   <body class="bg-gray-100 min-h-screen antialiased">

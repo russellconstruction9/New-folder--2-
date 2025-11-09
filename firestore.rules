@@ -1,0 +1,64 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read/write their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Projects - users can read/write projects they're associated with
+    match /projects/{projectId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.uid in resource.data.teamMembers || 
+         request.auth.uid == resource.data.createdBy);
+      allow create: if request.auth != null;
+    }
+    
+    // Tasks - users can read/write tasks assigned to them or that they created
+    match /tasks/{taskId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.uid == resource.data.assigneeId || 
+         request.auth.uid == resource.data.createdBy);
+      allow create: if request.auth != null;
+    }
+    
+    // Time logs - users can read/write their own time logs
+    match /timeLogs/{logId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null;
+    }
+    
+    // Inventory - authenticated users can read, admins can write
+    match /inventory/{itemId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'manager'];
+    }
+    
+    // Invoices - users can read invoices for their projects
+    match /invoices/{invoiceId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'manager'];
+    }
+    
+    // Expenses - users can read/write expenses for projects they're on
+    match /expenses/{expenseId} {
+      allow read, write: if request.auth != null;
+      allow create: if request.auth != null;
+    }
+    
+    // Project photos - users can read/write photos for projects they're on
+    match /projectPhotos/{photoId} {
+      allow read, write: if request.auth != null;
+      allow create: if request.auth != null;
+    }
+    
+    // Punch list items - users can read/write for projects they're on
+    match /punchListItems/{itemId} {
+      allow read, write: if request.auth != null;
+      allow create: if request.auth != null;
+    }
+  }
+}

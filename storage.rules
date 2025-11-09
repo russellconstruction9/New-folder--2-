@@ -1,0 +1,35 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Project photos - users can upload/read photos for projects they're associated with
+    match /projects/{projectId}/photos/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+        request.resource.size < 10 * 1024 * 1024 && // 10MB limit
+        request.resource.contentType.matches('image/.*');
+    }
+    
+    // User avatars - users can upload/read their own avatar
+    match /users/{userId}/avatar/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && 
+        request.auth.uid == userId &&
+        request.resource.size < 2 * 1024 * 1024 && // 2MB limit
+        request.resource.contentType.matches('image/.*');
+    }
+    
+    // Invoice documents - managers/admins can upload invoices
+    match /invoices/{invoiceId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+    
+    // Project documents - users can upload documents for projects they're on
+    match /projects/{projectId}/documents/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null &&
+        request.resource.size < 25 * 1024 * 1024; // 25MB limit for documents
+    }
+  }
+}

@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Sitemap location (update with your actual domain)
+Sitemap: https://constructtrack-pro.netlify.app/sitemap.xml
+
+# Disallow certain paths (if any)
+Disallow: /admin/
+Disallow: /.netlify/
+Disallow: /api/
+
+# Crawl delay (optional)
+Crawl-delay: 1
